@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent
 TEMPLATES_DIR = BASE_DIR / "templates"
 STATIC_DIR = BASE_DIR / "static"
 
-app = FastAPI(title="Criador de Contexto Git")
+app = FastAPI(title="Git Context Builder")
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
@@ -192,11 +192,11 @@ def clone_repository(
         )
     except OSError as exc:
         shutil.rmtree(tmp_dir, ignore_errors=True)
-        return None, f"Falha ao executar git: {exc}"
+        return None, f"Failed to run git: {exc}"
 
     if result.returncode != 0:
         shutil.rmtree(tmp_dir, ignore_errors=True)
-        error_message = (result.stderr or result.stdout or "Erro desconhecido no git clone").strip()
+        error_message = (result.stderr or result.stdout or "Unknown error during git clone").strip()
         return None, error_message
 
     return tmp_dir, None
@@ -224,7 +224,7 @@ async def connect(request: Request):
             request,
             "index.html",
             status_code=400,
-            error="Informe a URL do repositorio.",
+            error="Enter the repository URL.",
             page="index",
         )
 
@@ -274,7 +274,7 @@ async def generate(request: Request, repo_id: str):
 
     output, included_count = generate_context(repo.path, selected, ignore_patterns)
     repo.output = output
-    preview = output[:6000] if output else "Nenhum arquivo de texto foi selecionado/encontrado."
+    preview = output[:6000] if output else "No text file was selected or found."
 
     return render_page(
         request,
@@ -292,7 +292,7 @@ async def download(request: Request, repo_id: str):
     if repo is None:
         return redirect_to(request, "index")
 
-    headers = {"Content-Disposition": 'attachment; filename="contexto_repo.txt"'}
+    headers = {"Content-Disposition": 'attachment; filename="repo_context.txt"'}
     return Response(content=repo.output, media_type="text/plain; charset=utf-8", headers=headers)
 
 
