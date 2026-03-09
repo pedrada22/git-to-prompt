@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% from "components.html" import render_tree %}
+
+{% block title %}Selecionar Arquivos{% endblock %}
+
+{% block content %}
+<h1>Selecionar arquivos do repositorio</h1>
+
+<div class="page-meta">
+  Repositorio: <strong>{{ repo_url }}</strong> | Total de arquivos: {{ total_files }}
+</div>
+
+<form method="post" action="{{ request.url_for('generate', repo_id=repo_id) }}">
+  <div class="grid">
+    <section class="card">
+      <div class="actions">
+        <button type="button" id="checkAll" class="button secondary">Marcar tudo</button>
+        <button type="button" id="uncheckAll" class="button secondary">Desmarcar tudo</button>
+        <button type="button" id="applyIgnore" class="button secondary">Aplicar ignore no checklist</button>
+      </div>
+
+      <p class="muted">Todas as caixas comecam marcadas. Desmarque o que quiser excluir.</p>
+      <hr>
+
+      {{ render_tree(tree) }}
+    </section>
+
+    <section class="card">
+      <label for="ignore_patterns"><strong>Ignore (opcional)</strong></label>
+      <textarea id="ignore_patterns" name="ignore_patterns" placeholder="Exemplos:
+*.png
+*.jpg
+node_modules/*
+*.lock"></textarea>
+      <p class="muted">Um padrao por linha (estilo glob). Ex.: <code>*.md</code>, <code>docs/*</code>.</p>
+      <button type="submit" class="button">Gerar texto concatenado</button>
+    </section>
+  </div>
+</form>
+{% endblock %}

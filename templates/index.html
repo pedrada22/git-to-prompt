@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Criador de Contexto Git{% endblock %}
+
+{% block content %}
+<h1>Criador de Contexto Git</h1>
+
+<section class="card">
+  <p>Informe o repositorio e, se necessario, credenciais para clonagem.</p>
+
+  {% if error %}
+    <div class="alert">{{ error }}</div>
+  {% endif %}
+
+  <form method="post" action="{{ request.url_for('connect') }}" class="stack-form">
+    <label for="repo_url">URL do repositorio git</label>
+    <input id="repo_url" name="repo_url" type="text" required placeholder="https://github.com/org/repo.git">
+
+    <label for="branch">Branch (opcional)</label>
+    <input id="branch" name="branch" type="text" placeholder="main">
+
+    <label for="username">Usuario (opcional)</label>
+    <input id="username" name="username" type="text" placeholder="usuario">
+
+    <label for="password">Token/Senha (opcional)</label>
+    <input id="password" name="password" type="password" placeholder="ghp_...">
+    <p class="muted">Para repositorios privados, prefira token de acesso pessoal.</p>
+
+    <button type="submit" class="button">Conectar e listar arquivos</button>
+  </form>
+</section>
+{% endblock %}

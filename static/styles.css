@@ -1,0 +1,144 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f7fb;
+  color: #111827;
+}
+
+.page-shell {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 0 16px 32px;
+}
+
+h1,
+h2 {
+  margin-top: 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #d9dfeb;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 1px 2px rgba(17, 24, 39, 0.05);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+}
+
+.stack-form {
+  display: grid;
+  gap: 8px;
+}
+
+.page-meta,
+.muted {
+  color: #5b6475;
+  font-size: 14px;
+}
+
+.page-meta {
+  margin-bottom: 12px;
+}
+
+.alert {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid #f0b4b4;
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #9b1c1c;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid #c7d0e0;
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+
+textarea {
+  min-height: 180px;
+  resize: vertical;
+  font-family: Consolas, monospace;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.button.secondary {
+  border-color: #c7d0e0;
+  background: #fff;
+  color: #111827;
+}
+
+.tree {
+  list-style: none;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.tree li {
+  margin: 4px 0;
+}
+
+.tree-folder,
+.tree-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+
+.tree-folder span {
+  font-weight: 700;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 500px;
+  overflow: auto;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

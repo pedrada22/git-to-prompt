@@ -1,0 +1,27 @@
+{% macro action_link(href, label, new_tab=False) -%}
+<a class="button secondary" href="{{ href }}"{% if new_tab %} target="_blank" rel="noreferrer"{% endif %}>{{ label }}</a>
+{%- endmacro %}
+
+{% macro render_tree(node, parent="") -%}
+<ul class="tree">
+  {% for name, value in node.items() %}
+    {% set full_path = (parent ~ "/" ~ name).strip("/") %}
+    {% if value is mapping %}
+      <li>
+        <label class="tree-folder">
+          <input type="checkbox" class="dir-toggle" data-dir="{{ full_path }}" checked>
+          <span>[DIR] {{ name }}</span>
+        </label>
+        {{ render_tree(value, full_path) }}
+      </li>
+    {% else %}
+      <li>
+        <label class="tree-file">
+          <input type="checkbox" name="selected" value="{{ full_path }}" data-path="{{ full_path }}" checked>
+          <span>[ARQ] {{ name }}</span>
+        </label>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{%- endmacro %}

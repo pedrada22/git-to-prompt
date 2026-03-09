@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "components.html" import action_link %}
+
+{% block title %}Resultado{% endblock %}
+
+{% block content %}
+<h1>Contexto gerado</h1>
+
+<section class="card">
+  <p>Arquivos incluidos: <strong>{{ file_count }}</strong></p>
+
+  <div class="actions">
+    {{ action_link(request.url_for('download', repo_id=repo_id), "Baixar resultado (.txt)") }}
+    {{ action_link(request.url_for('view_text', repo_id=repo_id), "Abrir texto completo no navegador", True) }}
+    {{ action_link(request.url_for('select_files', repo_id=repo_id), "Voltar para selecao") }}
+  </div>
+
+  <h2>Previa</h2>
+  <pre>{{ preview }}</pre>
+</section>
+{% endblock %}
